@@ -48,7 +48,7 @@ FROM {{ app["name"] }}-dev AS {{ app["name"] }}
 COPY ./env/production /openedx/env/production
 RUN touch /openedx/env/production.override \
   {%- for key, value in app.get("env", {}).get("production", {}).items() %}
-  && echo "{{ key }}={{ value }}" >> /openedx/env/production.override \
+  && echo "{{ key }}='{{ value }}'" >> /openedx/env/production.override \
   {%- endfor %}
   && echo "done setting production overrides"
 RUN bash -c "set -a && source /openedx/env/production && source /openedx/env/production.override && npm run build"

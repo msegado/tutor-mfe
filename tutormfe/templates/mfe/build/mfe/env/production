@@ -1,4 +1,4 @@
-{# https://edx.readthedocs.io/projects/edx-developer-docs/en/latest/developers_guide/micro_frontends_in_open_edx.html#configuration-with-environment-variables #}
+{# https://edx.readthedocs.io/projects/edx-developer-docs/en/latest/micro_frontends/index.html#required-environment-variables #}
 ACCESS_TOKEN_COOKIE_NAME='edx-jwt-cookie-header-payload'
 BASE_URL='{{ MFE_HOST }}'
 CSRF_TOKEN_API_PATH='/csrf/api/v1/token'
