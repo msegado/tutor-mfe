@@ -3,7 +3,18 @@ FROM docker.io/node:12-bullseye-slim AS base
 RUN apt update \
   && apt install -y git \
     # required for cwebp-bin
-    gcc git libgl1 libxi6 make
+    gcc git libgl1 libxi6 make \
+    # additionally required for gifsicle, mozjpeg, and optipng
+    autoconf libtool pkg-config zlib1g-dev \
+    # additionally required for node-sass
+    python g++
+
+# Required for building optipng on M1
+ENV CPPFLAGS=-DPNG_ARM_NEON_OPT=0
+
+# Required for avoiding failed frontend-app-learning build due to missing binary on M1
+# (breaks pact tests)
+ENV PACT_SKIP_BINARY_INSTALL=true
 
 RUN mkdir -p /openedx/app /openedx/env
 WORKDIR /openedx/app
